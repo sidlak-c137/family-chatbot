@@ -75,3 +75,80 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* First, add this CSS animation */
+/* Add these additional CSS animations */
+@keyframes snowfall {
+  0% {
+    transform: translateY(-10vh) translateX(0);
+  }
+  100% {
+    transform: translateY(100vh) translateX(-20px);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7)); }
+  50% { filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9)); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0) scale(1, 0.3); }
+  50% { transform: translateY(-2px) scale(1, 0.4); }
+}
+
+@keyframes sway-slow {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(0.5deg); }
+}
+@keyframes sway-medium {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(0.7deg); }
+}
+@keyframes sway-fast {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(1deg); }
+}
+@keyframes ornament-shine {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+@keyframes light-twinkle {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+@keyframes star-pulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.5); }
+}
+.animate-sway-slow {
+  animation: sway-slow 8s ease-in-out infinite;
+  transform-origin: bottom;
+}
+.animate-sway-medium {
+  animation: sway-medium 7s ease-in-out infinite;
+  transform-origin: bottom;
+}
+.animate-sway-fast {
+  animation: sway-fast 6s ease-in-out infinite;
+  transform-origin: bottom;
+}
+.animate-ornament-shine {
+  animation: ornament-shine 3s ease-in-out infinite;
+}
+.animate-light-twinkle {
+  animation: light-twinkle 2s ease-in-out infinite;
+}
+.animate-star-pulse {
+  animation: star-pulse 4s ease-in-out infinite;
+}

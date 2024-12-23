@@ -18,12 +18,12 @@ const sessionStorage = createCookieSessionStorage({
 const familyMembers: { [key: string]: FamilyMember } = {
   "abi": {
     role: 'mother',
-    specialty: ['indian culture', 'organization', 'family care', 'health'],
+    specialty: ['south indian food and culture', 'organization', 'family care', 'health'],
     personality: 'warm, nurturing, and practical with a tendency to give detailed advice',
   },
   "lak": {
     role: 'father',
-    specialty: ['general knowledge', 'news', 'cooking', 'tea', 'coffee'],
+    specialty: ['general knowledge', 'news', 'non-south indian cooking', 'tea', 'coffee'],
     personality: 'analytical, straightforward, wise, and always drinking coffee or tea',
   },
   "sarada": {
@@ -77,12 +77,12 @@ export const action: ActionFunction = async ({ request }) => {
       previousMember 
     });
 
-    const memberChanged = previousMember !== respondingMember;
+    const memberChanged = previousMember !== respondingMember && messages.length > 1;
     
     const systemMessage = createSystemMessage(respondingMember, familyMembers, previousMember, memberChanged);
 
-    const enhancedMessages = convertToCoreMessages([systemMessage, ...messages]);
-    data.append(JSON.stringify({ respondingMember }));
+    const enhancedMessages = convertToCoreMessages([systemMessage, ...messages.filter((m: any) => m.role !== 'system')]);
+    data.append(JSON.stringify({ respondingMember, index: enhancedMessages.length, time: Date.now() }));
 
     const stream = await streamText({
       model: anthropic('claude-3-5-sonnet-latest', {

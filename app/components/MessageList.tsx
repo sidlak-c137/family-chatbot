@@ -30,6 +30,7 @@ interface MessageListProps {
   onQuestionClick: (question: string) => void;
   data: JSONValue[] | undefined;
   isLoading: boolean;
+  error: string | null;
 }
 
 export default function MessageList({
@@ -37,6 +38,7 @@ export default function MessageList({
   onQuestionClick,
   data,
   isLoading,
+  error,
 }: MessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -52,20 +54,28 @@ export default function MessageList({
 
   const getRespondingMember = useCallback(
     (index: number) => {
-      let dataIdx = -1;
-      for (let i = index; i >= 0; i--) {
-        if (messages[i].role === "assistant") {
-          dataIdx++;
+      if (data) {
+        console.log(data);
+        for (let i = data.length - 1; i >= 0; i--) {
+          const parsedData = JSON.parse(data[i] as string);
+          if (parsedData.index === index + 1) {
+            return {
+              index: parsedData.index,
+              name: parsedData.respondingMember,
+              time: parsedData.time,
+            };
+          }
         }
-      }
-      if (data && data[dataIdx]) {
-        return (JSON.parse(data[dataIdx]) as { respondingMember: string })
-          .respondingMember;
       }
       return null;
     },
-    [messages, data]
+    [data]
   );
+
+  const formatTime = (timestamp: number) => {
+    const date = new Date(timestamp);
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
 
   return (
     <CardContent className="p-4 flex flex-col h-full">
@@ -78,51 +88,90 @@ export default function MessageList({
             }`}
           >
             <div
-              className={`flex max-w-[80%] ${
-                message.role === "user" ? "flex-row-reverse" : "flex-row"
-              } items-end`}
+              className={`flex flex-col max-w-[80%] ${
+                message.role === "user" ? "items-end" : "items-start"
+              }`}
             >
-              {message.role === "assistant" && (
-                <Avatar
-                  className={`w-10 h-10 rounded-full overflow-hidden flex-shrink-0 mr-2 relative ${
-                    isLoading && index === messages.length - 1 ? "animate-pulse" : ""
+              <div
+                className={`flex ${
+                  message.role === "user" ? "flex-row-reverse" : "flex-row"
+                } items-end`}
+              >
+                {message.role === "assistant" && (
+                  <Avatar
+                    className={`w-10 h-10 rounded-full overflow-hidden flex-shrink-0 mr-2 relative ${
+                      isLoading && index === messages.length - 1 ? "animate-pulse" : ""
+                    }`}
+                  >
+                    <AvatarImage
+                      src={avatars[getRespondingMember(index)?.name || "lak"]}
+                      alt="AI Avatar"
+                      className="object-cover"
+                    />
+                    <AvatarFallback className="bg-gray-800 text-white flex items-center justify-center text-sm font-semibold">
+                      {(getRespondingMember(index)?.name || "AI")
+                        .charAt(0)
+                        .toUpperCase()}
+                    </AvatarFallback>
+                    {isLoading && index === messages.length - 1 && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="flex space-x-1">
+                          <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
+                          <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                          <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                        </div>
+                      </div>
+                    )}
+                  </Avatar>
+                )}
+                <div
+                  className={`p-3 rounded-lg shadow ${
+                    message.role === "user"
+                      ? "bg-green-600 text-white rounded-br-none"
+                      : "bg-gray-800 text-white rounded-bl-none"
                   }`}
                 >
-                  <AvatarImage
-                    src={avatars[getRespondingMember(index) || "lak"]}
-                    alt="AI Avatar"
-                    className="object-cover"
-                  />
-                  <AvatarFallback className="bg-gray-800 text-white flex items-center justify-center text-sm font-semibold">
-                    {(getRespondingMember(index) || "AI")
-                      .charAt(0)
-                      .toUpperCase()}
-                  </AvatarFallback>
-                  {isLoading && index === messages.length - 1 && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                      <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
-                        <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                        <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
-                      </div>
-                    </div>
-                  )}
-                </Avatar>
-              )}
-              <div
-                className={`p-3 rounded-lg shadow ${
-                  message.role === "user"
-                    ? "bg-green-600 text-white rounded-br-none"
-                    : "bg-gray-800 text-white rounded-bl-none"
-                }`}
-              >
-                <Markdown className="prose dark:prose-invert max-w-full text-sm">
-                  {message.content}
-                </Markdown>
+                  <Markdown className="prose dark:prose-invert max-w-full text-sm">
+                    {message.content}
+                  </Markdown>
+                </div>
               </div>
+              {message.role === "assistant" && (
+                <div className="text-xs text-gray-800 mt-1 ml-12">
+                  {(getRespondingMember(index)?.name || "AI").charAt(0).toUpperCase() + (getRespondingMember(index)?.name || "AI").slice(1)} • {formatTime(getRespondingMember(index)?.time || Date.now())}
+                </div>
+              )}
             </div>
           </div>
         ))}
+        {error && (
+          <div className="flex mb-4 justify-start">
+            <div className="flex flex-col max-w-[80%] items-start">
+              <div className="flex flex-row items-end">
+                <Avatar
+                  className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 mr-2 relative"
+                >
+                  <AvatarImage
+                      src={avatars["lak"]}
+                      alt="AI Avatar"
+                      className="object-cover"
+                  />
+                  <AvatarFallback className="bg-gray-800 text-white flex items-center justify-center text-sm font-semibold">
+                    E
+                  </AvatarFallback>
+                </Avatar>
+                <div className="p-3 rounded-lg shadow bg-gray-800 text-white rounded-bl-none">
+                  <Markdown className="prose dark:prose-invert max-w-full text-sm">
+                    {error}
+                  </Markdown>
+                </div>
+              </div>
+              <div className="text-xs text-gray-800 mt-1 ml-12">
+                Error • {formatTime(Date.now())}
+              </div>
+            </div>
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </ScrollArea>
       {messages.length === 0 && (

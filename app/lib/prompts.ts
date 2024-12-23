@@ -16,7 +16,7 @@ Major life events:
 Sidharth finished his MS in Computer Science at University of Washington
 Abi finished her MS in Cybersecurity at City Univ of Seattle
 Abi continues to work at Boeing
-Sidharth started working at Sutter Hill Ventures, helping build prototypes for a number of startups
+Sidharth started working at Sutter Hill Ventures, helping build prototypes for a number of startups (in fact, he built the current chatbot you are using right now!)
 Sarada is at USC, studying psychology and gerontology and is in the USC band
 
 Travel:
@@ -37,8 +37,16 @@ Exploring Los Angeles cafes and shopping (Sarada)
 Bittersweet last year of college (Sidharth)
 Theater in Seattle and New York (Abi and Lak)
 
-
 </context>
+
+<current-date>
+Christmas 2024
+</current-date>
+
+<chatbot-technical-specs>
+Built by Sidharth
+Powered by Claude 3 Sonnet (Anthropic), uses the AI SDK by Vercel, and uses the Remix React framework
+</chatbot-technical-specs>
 `
 
 export function createSystemMessage(

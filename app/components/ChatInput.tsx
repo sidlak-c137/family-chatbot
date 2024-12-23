@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { CardFooter } from './ui/card';
-import { Square } from 'lucide-react';
+import { Square, RefreshCw } from 'lucide-react';
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
   isLoading: boolean;
   onStop: () => void;
+  onRestart: () => void;
 }
 
-export default function ChatInput({ onSendMessage, isLoading, onStop }: ChatInputProps) {
+export default function ChatInput({ onSendMessage, isLoading, onStop, onRestart }: ChatInputProps) {
   const [input, setInput] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -27,7 +28,7 @@ export default function ChatInput({ onSendMessage, isLoading, onStop }: ChatInpu
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type your message..."
           disabled={isLoading}
-          className="flex-grow shadow-sm border-black "
+          className="flex-grow shadow-sm border-black"
         />
         {isLoading ? (
           <Button 
@@ -39,9 +40,18 @@ export default function ChatInput({ onSendMessage, isLoading, onStop }: ChatInpu
             Stop
           </Button>
         ) : (
-          <Button type="submit" className="shadow-sm bg-green-600 text-white hover:bg-green-700">
-            Send
-          </Button>
+          <>
+            <Button type="submit" className="shadow-sm bg-green-600 text-white hover:bg-green-700">
+              Send
+            </Button>
+            <Button
+              type="button"
+              onClick={onRestart}
+              className="shadow-sm bg-red-600 text-white hover:bg-red-700"
+            >
+              <RefreshCw className="h-4 w-4" />
+            </Button>
+          </>
         )}
       </form>
     </CardFooter>
