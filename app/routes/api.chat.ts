@@ -1,10 +1,21 @@
-import { ActionFunction } from '@remix-run/node';
-import { convertToCoreMessages, StreamData, streamText, tool } from 'ai';
+import { ActionFunction, createCookieSessionStorage } from '@remix-run/node';
+import { convertToCoreMessages, StreamData, streamText } from 'ai';
+import { createSystemMessage } from '~/lib/prompts';
 import { anthropic, generate } from '~/models/llm.server';
-import { z } from 'zod';
+import { FamilyMember } from '~/types';
 
-// Define family member personalities and specialties
-const familyMembers: { [key: string]: { role: string, specialty: string[], personality: string } } = {
+const sessionStorage = createCookieSessionStorage({
+  cookie: {
+    name: 'family_chat',
+    secrets: [process.env.SESSION_SECRET || 'default-secret'],
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 60 * 60 * 24 * 30, // 30 days
+    httpOnly: true,
+  },
+});
+
+const familyMembers: { [key: string]: FamilyMember } = {
   "abi": {
     role: 'mother',
     specialty: ['indian culture', 'organization', 'family care', 'health'],
@@ -27,46 +38,50 @@ const familyMembers: { [key: string]: { role: string, specialty: string[], perso
   },
 };
 
-// Define the selector tool
-const selectorTool = async ({ query }: { query: string }) => {
-    const selectorPrompt = `
-      Analyze this query and select the most appropriate family member to respond based on their specialties:
-      Query: "${query}"
+const selectorTool = async ({ query, previousMember }: { query: string; previousMember: string | null }): Promise<string> => {
+  const selectorPrompt = `
+    Analyze this query and select the most appropriate family member to respond based on their specialties.
+    If the query is a follow-up or related to the previous conversation, prefer keeping the same family member (${previousMember || 'none'}).
+    Only change the family member if the new topic clearly matches another member's expertise better.
 
-      Family members and their specialties:
-      ${Object.entries(familyMembers).map(([name, { role, specialty, personality }]) => `${name}: A ${role} with expertise in ${specialty.join(', ')}, ${personality}`).join('\n')}
+    Query: "${query}"
 
-      Return only the name of the family member in lowercase (abi, lak, sarada, sidharth). If none seem appropriate, select 'lak'.
-    `;
+    Family members and their specialties:
+    ${Object.entries(familyMembers).map(([name, { role, specialty, personality }]) => 
+      `${name}: A ${role} with expertise in ${specialty.join(', ')}, ${personality}`).join('\n')}
 
-    const response = await generate(selectorPrompt);
-    const selectedMember = response.trim().toLowerCase();
-    return selectedMember;
-  };
+    Return only the name of the family member in lowercase (abi, lak, sarada, sidharth). If none seem appropriate, select 'lak'.
+  `;
+
+  const response = await generate(selectorPrompt);
+  const selectedMember = response.trim().toLowerCase();
+  if (!Object.keys(familyMembers).includes(selectedMember)) {
+    return 'lak';
+  }
+  console.log(`Selected family member: ${selectedMember}`);
+  return selectedMember;
+};
 
 export const action: ActionFunction = async ({ request }) => {
-  const { messages } = await request.json();
+  const session = await sessionStorage.getSession(request.headers.get('Cookie'));
+  const previousMember = session.get('lastFamilyMember') as string | null;
   const data = new StreamData();
   const abortController = new AbortController();
 
   try {
-    // Get the last user message
+    const { messages } = await request.json();
     const lastUserMessage = messages[messages.length - 1].content;
     
-    // Use the selector tool to determine which family member should respond
-    const respondingMember = await selectorTool({ query: lastUserMessage });
-    console.log(`Selected family member: ${respondingMember}`);
+    const respondingMember = await selectorTool({ 
+      query: lastUserMessage, 
+      previousMember 
+    });
+
+    const memberChanged = previousMember !== respondingMember;
     
-    // Add personality context to the system message
-    const systemMessage = {
-      role: 'system',
-      content: `You are responding in the voice of as ${respondingMember}, the ${familyMembers[respondingMember].role} of the family. ${familyMembers[respondingMember].personality}. Your expertise includes ${familyMembers[respondingMember].specialty.join(', ')}.`,
-    };
+    const systemMessage = createSystemMessage(respondingMember, familyMembers, previousMember, memberChanged);
 
-    // Add the system message to the beginning of the messages array
     const enhancedMessages = convertToCoreMessages([systemMessage, ...messages]);
-
-    // Send the responding member information as a separate chunk
     data.append(JSON.stringify({ respondingMember }));
 
     const stream = await streamText({
@@ -90,7 +105,18 @@ export const action: ActionFunction = async ({ request }) => {
     });
 
     const response = stream.toDataStreamResponse({ data });
-    return response;
+    
+    // Update session with new family member
+    session.set('lastFamilyMember', respondingMember);
+    
+    return new Response(response.body, {
+      headers: {
+        ...response.headers,
+        'Set-Cookie': await sessionStorage.commitSession(session),
+      },
+      status: response.status,
+      statusText: response.statusText,
+    });
 
   } catch (error) {
     console.error(error);
