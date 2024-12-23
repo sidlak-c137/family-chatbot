@@ -1,0 +1,22 @@
+diff --git a/node_modules/@remix-run/node/dist/globals.js b/node_modules/@remix-run/node/dist/globals.js
+index b96820b..7277c69 100644
+--- a/node_modules/@remix-run/node/dist/globals.js
++++ b/node_modules/@remix-run/node/dist/globals.js
+@@ -28,7 +28,7 @@ function installGlobals({
+     global.Headers = UndiciHeaders;
+     global.Request = UndiciRequest;
+     global.Response = UndiciResponse;
+-    global.fetch = undiciFetch;
++    // global.fetch = undiciFetch;
+     global.FormData = UndiciFormData;
+   } else {
+     let {
+@@ -43,7 +43,7 @@ function installGlobals({
+     global.Headers = RemixHeaders;
+     global.Request = RemixRequest;
+     global.Response = RemixResponse;
+-    global.fetch = RemixFetch;
++    // global.fetch = RemixFetch;
+     global.FormData = RemixFormData;
+   }
+ }
