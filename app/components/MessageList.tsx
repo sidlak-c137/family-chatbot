@@ -124,16 +124,21 @@ export default function MessageList({
                     )}
                   </Avatar>
                 )}
-                <div
-                  className={`p-3 rounded-lg shadow ${
-                    message.role === "user"
-                      ? "bg-green-600 text-white rounded-br-none"
-                      : "bg-gray-800 text-white rounded-bl-none"
-                  }`}
-                >
-                  <Markdown className="prose dark:prose-invert max-w-full text-sm">
-                    {message.content}
-                  </Markdown>
+                <div className="flex flex-col space-y-2">
+                  {message.content.split('\n').filter(line => line.trim() !== '').map((line, lineIndex) => (
+                    <div
+                      key={lineIndex}
+                      className={`p-3 rounded-lg shadow ${
+                        message.role === "user"
+                          ? "bg-green-600 text-white rounded-br-none"
+                          : "bg-gray-800 text-white rounded-bl-none"
+                      }`}
+                    >
+                      <Markdown className="prose dark:prose-invert max-w-full text-sm">
+                        {line}
+                      </Markdown>
+                    </div>
+                  ))}
                 </div>
               </div>
               {message.role === "assistant" && (
