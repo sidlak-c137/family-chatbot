@@ -31,14 +31,17 @@ export default function ChatInput({ onSendMessage, isLoading, onStop, onRestart 
           className="flex-grow shadow-sm border-black"
         />
         {isLoading ? (
-          <Button 
-            type="button" 
-            onClick={onStop} 
-            className="shadow-sm bg-white text-red-600 border border-red-600 hover:bg-red-50"
-          >
-            <Square className="h-4 w-4" />
-            Stop
-          </Button>
+          <div className="flex items-center space-x-2">
+            <RefreshCw className="h-4 w-4 text-green-600 animate-spin" />
+            <Button 
+              type="button" 
+              onClick={onStop} 
+              className="shadow-sm bg-white text-red-600 border border-red-600 hover:bg-red-50"
+            >
+              <Square className="h-4 w-4" />
+              Stop
+            </Button>
+          </div>
         ) : (
           <>
             <Button type="submit" className="shadow-sm bg-green-600 text-white hover:bg-green-700">

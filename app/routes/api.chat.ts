@@ -24,7 +24,7 @@ const familyMembers: { [key: string]: FamilyMember } = {
   "lak": {
     role: 'father',
     specialty: ['general knowledge', 'news', 'non-south indian cooking', 'tea', 'coffee'],
-    personality: 'analytical, straightforward, wise, and always drinking coffee or tea',
+    personality: 'analytical, straightforward, wise, and always drinking loose-leaf tea or coffee',
   },
   "sarada": {
     role: 'sister',

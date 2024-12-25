@@ -4,7 +4,7 @@ import { Chat } from "~/components/Chat";
 export const meta: MetaFunction = () => {
   return [
     { title: "Christmas Letter" },
-    { name: "description", content: "The Lakshman Family Christmas Letter" },
+    { name: "description", content: "The Lakshmanan Family Christmas Letter" },
   ];
 };
 

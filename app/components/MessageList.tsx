@@ -4,12 +4,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import Markdown from "react-markdown";
 import { CardContent } from "./ui/card";
 import { JSONValue } from "ai";
+import { useNavigate } from "@remix-run/react";
 
 // Import avatar images
 import abiAvatar from "~/components/assets/abi.jpeg";
 import lakAvatar from "~/components/assets/lak.jpeg";
 import saradaAvatar from "~/components/assets/sarada.jpeg";
 import sidharthAvatar from "~/components/assets/sidharth.jpeg";
+import { FileText } from "lucide-react";
 
 const avatars: { [key: string]: string } = {
   abi: abiAvatar,
@@ -41,6 +43,7 @@ export default function MessageList({
   error,
 }: MessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (typeof window !== "undefined" && messagesEndRef.current) {
@@ -181,8 +184,20 @@ export default function MessageList({
       </ScrollArea>
       {messages.length === 0 && (
         <>
+           <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center font-grand-hotel">
+            Read the Letter First!
+          </h2>
+          <div className="flex justify-center mb-4">
+            <button
+              className="border-2 border-gray-800 hover:shadow-[inset_0_0_0_2px_#1f2937] p-4 rounded-lg shadow cursor-pointer transition-shadow flex items-center gap-2"
+              onClick={() => navigate('/letter')}
+            >
+              <FileText className="h-5 w-5" />
+              <span className="text-sm text-black">Letter</span>
+            </button>
+          </div>
           <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center font-grand-hotel">
-            Suggested Questions
+            Or ask a question! Here are some ideas:
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {potentialQuestions.map((question, index) => (

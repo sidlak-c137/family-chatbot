@@ -2,40 +2,17 @@ import { FamilyMember } from '~/types';
 
 const context = `
 <context>
-Lak’s work took him to interesting places in Europe — Paris, Lyon, and Madrid, mostly. He enjoyed the blessings of living in the lovely Pacific Northwest, by going hiking many weekends. He repeated the Enchantments through-hike this summer with three friends — one, a college buddy, another a ex-colleague, and the third a fellow writer. Lak continues to enjoy learning to cook new things — his wok phase is still going strong because stir fries are perfect when cooking for two, now that they are an empty nest. He recommends that you try his new favorite pasta sauce — mix gochujang with grated parmesan cheese, honey, and raw egg yolks. It’s the most amazing mix of hot, umami, sweet, and creamy. He continues to be passionate about Bridge; his team squeaked through the regional qualifier and got to play in the Grand National Teams event in Toronto but were quickly eliminated. One of the best things this year was celebrating important family milestones — besides celebrating Sidharth and Abi’s Masters graduations, he went to a nephew’s wedding in Atlanta in summer, a nephew’s graduation in Urbana Champaign, an extended family retreat in Detroit, graduation party in San Jose for two nieces who are now MDs, and an uncle’s 80th birthday in India. It was great to go visit the kids in the Bay Area and LA and see the lives they are building. It’s even nicer to have them back for the holidays.
+This was the year that Sidharth finished his MS degree and started a job in the Bay Area. Abi and Lak continue to get used to the empty nest lifestyle, and Sarada is getting closer to the end of her undergrad.
 
-Abi was very busy in the first half of the year as she was juggling a full-time job with a Masters program. She graduated with a degree in cybersecurity from the City University of Seattle. It was so nice that Abi’s parents could come for the graduation. She continues to work at Boeing. Her new hobby is basket weaving, and she’s made several nice new pieces. It gets lonely at home when Lak is traveling — the short trips are okay, but his long three-week-long trip over fall was hard. Walking every day, rain or shine, is what keeps her sane. Abi continues to enjoy theater — the season ticket to the Issaquah village theater gives us much needed date nights. It was also great to catch “Water for Elephants” in New York — Broadway is incomparable! The best part of the year were the trips we made to see the kids, and when the kids came home for the holidays.
+Lak has been enjoying the blessings of living in the lovely Pacific Northwest, by going hiking many weekends. He repeated the Enchantments through-hike this summer with three friends — one, a college buddy, another a ex-colleague, and the third a fellow writer. It’s always great when friendships last past the immediate circumstances. His work took him to Europe several times — Paris, Madrid, and Lyon, mostly, but he did visit a few other places. Lak continues to enjoy learning to cook new things — his Kenji wok phase is still going strong because stir fries are perfect when cooking for two, now that we are an empty nest. He recommends that you try his new favorite pasta sauce — mix gochujang with grated parmesan cheese, honey, and raw egg yolks. It’s the most amazing mix of hot, umami, sweet, and creamy. He continues to be passionate about Bridge; his team squeaked through the regional qualifier and got to play in the Grand National Teams event in Toronto but were quickly eliminated. One of the best things this year was celebrating important family milestones — besides celebrating Sidharth and Abi’s Masters graduations, we went to a nephew’s wedding in Atlanta in summer, a nephew’s graduation in Urbana Champaign, an extended family retreat in Detroit, graduation party in San Jose for two nieces who are now MDs, and an uncle’s 80th birthday in India. It was great to go visit the kids in the Bay Area and LA and see the lives they are building. It’s even nicer to have them back for the holidays.
 
-This captures the key things that happened in 2024 for a family of four:
-The father, Lak
-The mother, Abi
-The son, Sidharth, age 22
-The daughter, Sarada, age 20
+Abi was very busy in the first half of the year as she was juggling a full-time job with a Masters program. She graduated with a degree in cybersecurity from the City University of Seattle. It was so nice that Abi’s parents could come for the graduation. She continues to work at Boeing. Her new hobby is basket weaving, and she’s made several nice new pieces. It gets lonely at home when Lak is traveling — the short trips are okay, but his long three-week-long trip over fall was hard. Walking every day, rain or shine, is what keeps her sane. Abi continues to enjoy theater — the season ticket to the Issaquah village theater gives us much needed date nights. It was also great to catch “Water for Elephants” in New York — Broadway is incomparable! She also enjoyed exploring Toronto with Sarada, celebrating Sidharth’s and Arun’s graduations, and showing her parents around Seattle. The best part of the year were the trips we made to see the kids and having the kids home for the holidays.
 
-Major life events:
-Sidharth finished his MS in Computer Science at University of Washington
-Abi finished her MS in Cybersecurity at City Univ of Seattle
-Abi continues to work at Boeing
-Sidharth started working at Sutter Hill Ventures, helping build prototypes for a number of startups (in fact, he built the current chatbot you are using right now!)
-Sarada is at USC, studying psychology and gerontology and is in the USC band
+Now we will make a jarring choice to change to first person, because us kids want to make this letter feel more personal and less like a Wikipedia article about strangers.
 
-Travel:
-Lak traveled for work to Paris, Bruges, London, Lyon, Madrid
-Sarada went to Costa Rica for a research project
-Sidharth celebrated graduation with friends with a trip to Las Vegas
-Abi, Sarada, Lak to Toronto
-Abi, Sarada to Niagara falls
-Sidharth went to India to see grandparents
-Sidharth visited Singapore on the way back from India
-Lak visited India to see his parents and attend 80th birthday of his uncle
-Abi and Lak visited the kids in San Francisco Bay Area and Los Angeles
+Hey folks, Sidharth coming to you live from SF! 2024 started with me fresh off my "Great American Internship Tour" (six months, multiple cities, countless coffee runs). The big revelation? College isn't about acing exams – it's about making friends who'll help you ace exams! Just kidding... sort of. I wrapped up my Masters degree like a scene from a B-grade college movie: late night escapades with friends, bunking lectures for other more interesting lectures (like Hermione), and the mandatory Vegas victory lap. What happened in Vegas... well, let's just say I had a blast. Speaking of fun, my "last summer vacation ever" (cue dramatic violin) kicked off with a family pit stop in Michigan before my parents shipped me off to India. The official mission? Temple-hopping and grandparent-blessing-collecting. The unofficial mission? Probably spiritual damage control for Vegas. But wait, there's more! I pulled a classic millennial move and "found myself" in Singapore (translation: I found every food stall within a 10-mile radius and stuffed my face hole). My "solo" adventure quickly turned into a buddy comedy when I befriended a local bartender who became my nightlife sherpa. Also linked up with my dad's childhood friend, who showed me the real Singapore – you know, the parts they don't put on postcards. Now I'm adulting in the Bay Area, working at Sutter Hill Ventures as a Software Engineer. Yes, I'm basically building the future while trying to figure out how to do my own laundry. Missing my Seattle crew, but hey – I'm making new friends AND actual money! (Though in Bay Area terms, that mostly translates to "slightly better instant ramen").
 
-Activities:
-Hiking (Abi and Lak)
-Picnics (Sarada)
-Exploring Los Angeles cafes and shopping (Sarada)
-Bittersweet last year of college (Sidharth)
-Theater in Seattle and New York (Abi and Lak)
+This is Sarada :) I’m about to graduate from SC and am starting to feel the bittersweetness setting in. Traveling with all my friends to Michigan and Las Vegas have been some of my favorite collegiate memories. Like every college football fan, my hopes started so high and fell so quickly (after about the 4th USC loss…). I’m still studying psychology but added on a minor in gerontology (so most of you guys will be in good hands 🤝🏾). Over the summer, I roamed around Toronto and finally consciously saw Niagara Falls with my mom (they swear I went as a child but no pictures means that they're lying). [This is a sore point. We have so many pictures of our first child and so few of our second — Lak] We also finally got a dad's-side cousin meetup in Michigan which was a grand ol’ time. Oh yeah, and I went to Costa Rica at the beginning of the break for what was supposed to be a course (GERO 499: Finding the Key to a Long, Happy Life in Nicoya, Costa Rica’s Blue Zone) but turned out to be a 14 day “enjoy your time at the beach because we [the professors] just want a 50th honeymoon.” (which I guess I wasn't too mad about). After all these trips to Costa Rica, Toronto, and Michigan, I had to come back and start grinding on grad school apps (no one told me it would be as bad as college apps). Luckily, I was able to finish most of the work during the summer which allowed my fall semester to be filled with band (as per usual), research, and lots of time expanding my cafe list of LA. There's 53 and counting so let me know if you ever need a cafe rec. I have plenty! I've had a really fun year exploring cafes, new cities, and being with friends. Please manifest grad school with me as I continue into this new year 😁
 
 </context>
 
@@ -45,7 +22,7 @@ Christmas 2024
 
 <chatbot-technical-specs>
 Built by Sidharth
-Powered by Claude 3 Sonnet (Anthropic), uses the AI SDK by Vercel, and uses the Remix React framework
+Powered by Claude Sonnet 3.5 (Anthropic), uses the AI SDK by Vercel, and uses the Remix React framework
 </chatbot-technical-specs>
 `
 
@@ -65,7 +42,7 @@ export function createSystemMessage(
     
     ${context}
 
-    Answer in markdown format.
+    Answer in markdown format. Keep your responses brief (4-5 sentences max).
     `,
   };
 }

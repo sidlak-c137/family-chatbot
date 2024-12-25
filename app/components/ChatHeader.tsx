@@ -26,8 +26,8 @@ export default function ChatHeader({
 
   return (
     <div className="flex justify-between items-center p-4">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-grand-hotel">
-        Lakshman Family Christmas Letter
+      <h1 className={`text-2xl sm:text-3xl md:text-4xl font-bold font-grand-hotel ${messageCount <= 1 ? 'w-full text-center' : ''}`}>
+        Lakshmanan Family Christmas Letter
       </h1>
       {messageCount > 1 && (
         <Button
